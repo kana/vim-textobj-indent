@@ -1,0 +1,155 @@
+*textobj-indent.txt*	Text objects for lines with the same indentation level
+
+Version 0.0.0
+Script ID: 2484
+Copyright (C) 2008 kana <http://whileimautomaton.net/>
+License: MIT license  {{{
+    Permission is hereby granted, free of charge, to any person obtaining
+    a copy of this software and associated documentation files (the
+    "Software"), to deal in the Software without restriction, including
+    without limitation the rights to use, copy, modify, merge, publish,
+    distribute, sublicense, and/or sell copies of the Software, and to
+    permit persons to whom the Software is furnished to do so, subject to
+    the following conditions:
+
+    The above copyright notice and this permission notice shall be included
+    in all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+    OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+    MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+    IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+    CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+    TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+    SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+}}}
+
+CONTENTS					*textobj-indent-contents*
+
+Introduction		|textobj-indent-introduction|
+Interface		|textobj-indent-interface|
+  Commands		  |textobj-indent-commands|
+  Functions		  |textobj-indent-functions|
+  Mappings		  |textobj-indent-mappings|
+Bugs			|textobj-indent-bugs|
+Changelog		|textobj-indent-changelog|
+
+
+
+
+==============================================================================
+INTRODUCTION					*textobj-indent-introduction*
+
+*textobj-indent* is a Vim plugin to provide text objects to select a block of
+lines with the same indentation level.
+
+For example, if the content of a buffer as follows:
+(here "|" means the cursor and "_" means an indentation)
+>
+	  if some_condition_is_satisfied
+	  _|if another_condition_is_satisfied
+	  ____call s:do_x()
+	  __endif
+
+	  __...
+	  __endif
+	  else
+	  __...
+	  endif
+<
+|<Plug>(textobj-indent)| will selects lines as follows:
+(here ">" indicates the selected line)
+>
+	  if some_condition_is_satisfied
+	> _|if another_condition_is_satisfied
+	> ____call s:do_x()
+	> __endif
+	>
+	> __...
+	> __endif
+	  else
+	  __...
+	  endif
+<
+
+
+Requirements:
+- Vim 7.2 or later
+- |textobj-user| 0.3.7 or later (vimscript#2100)
+
+Latest version:
+http://github.com/kana/config/commits/vim-textobj-indent
+
+
+
+
+==============================================================================
+INTERFACE					*textobj-indent-interface*
+
+------------------------------------------------------------------------------
+MAPPINGS					*textobj-indent-mappings*
+
+These key mappings are defined in Visual mode and Operator-pending mode.
+
+<Plug>(textobj-indent)				*<Plug>(textobj-indent)*
+			Select a block of lines with the same indentation
+			level.  More precisely, select lines which are:
+			- adjacent to the current line, and
+			- indented the same or more amount
+			  as the current line, or empty line.
+
+			If the current line is empty, the indentation of the
+			next line will be used to select.  If that line is
+			also ampty, the indentation of the next line of that
+			line will be used instead.  And so forth.
+
+
+
+
+==============================================================================
+CUSTOMIZING					*textobj-indent-customizing*
+
+				    *g:textobj_indent_no_default_key_mappings*
+					    *:TextobjIndentDefaultKeyMappings*
+This plugin will define the following key mappings in Visual mode and
+Operator-pending mode automatically.  If you don't want these key mappings,
+define |g:textobj_indent_no_default_key_mappings| before this plugin is loaded
+(e.g. in your |vimrc|).  You can also use |:TextobjIndentDefaultKeyMappings|
+to redefine these key mappings.  This command doesn't override existing {lhs}s
+unless [!] is given.
+
+	{lhs}	{rhs}			~
+	-----	----------------------	~
+	ai	<Plug>(textobj-indent)
+	ii	<Plug>(textobj-indent)
+
+
+
+
+==============================================================================
+BUGS						*textobj-indent-bugs*
+
+- |<Plug>(textobj-indent)| counts indentation level by the number of leading
+  whitespace and/or tab.
+
+- The current selection is not extended like |aw| nor |ip|
+  whenever |<Plug>(textobj-indent)| is repeated in Visual mode.
+
+- So that [count] is just ignored.
+
+- See |textobj-user-bugs| for further information.
+
+
+
+
+==============================================================================
+CHANGELOG					*textobj-indent-changelog*
+
+0.0.0	2008-12-13T23:04:37+09:00
+	- Initial version.
+
+
+
+
+==============================================================================
+vim:tw=78:ts=8:ft=help:norl:fen:fdl=0:fdm=marker:
