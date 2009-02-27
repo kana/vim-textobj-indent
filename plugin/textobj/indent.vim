@@ -49,14 +49,14 @@ call textobj#user#plugin('indent', {
 
 
 " Misc.  "{{{1
-" Note: indent level -1 means an empty line.
+let s:EMPTY_LINE = -1
 function! s:select()  "{{{2
   " Check the indentation level of the current or below line.
   let cursor_linenr = line('.')
   let base_linenr = cursor_linenr
   while !0
     let base_indent = s:indent_level_of(base_linenr)
-    if base_indent != -1 || base_linenr == line('$')
+    if base_indent != s:EMPTY_LINE || base_linenr == line('$')
       break
     endif
     let base_linenr += 1
@@ -66,7 +66,7 @@ function! s:select()  "{{{2
   let end_linenr = base_linenr + 1
   while end_linenr <= line('$')
     let end_indent = s:indent_level_of(end_linenr)
-    if end_indent < base_indent && end_indent != -1
+    if end_indent < base_indent && end_indent != s:EMPTY_LINE
       break
     endif
     let end_linenr += 1
@@ -77,7 +77,7 @@ function! s:select()  "{{{2
   let start_linenr = cursor_linenr - 1
   while 1 <= start_linenr
     let start_indent = s:indent_level_of(start_linenr)
-    if start_indent < base_indent && start_indent != -1
+    if start_indent < base_indent && start_indent != s:EMPTY_LINE
       break
     endif
     let start_linenr -= 1
@@ -93,7 +93,7 @@ endfunction
 function! s:indent_level_of(linenr)  "{{{2
   let _ = getline(a:linenr)
   if _ == ''
-    return -1
+    return s:EMPTY_LINE
   else
     return len(matchstr(getline(a:linenr), '^\(\s*\)\ze\%(\S\|$\)'))
   endif
