@@ -57,7 +57,7 @@ For example, if the content of a buffer as follows:
 	  __...
 	  endif
 <
-|<Plug>(textobj-indent)| will selects lines as follows:
+|<Plug>(textobj-indent-a)| will select lines as follows:
 (here ">" indicates the selected line)
 >
 	  if some_condition_is_satisfied
@@ -67,6 +67,20 @@ For example, if the content of a buffer as follows:
 	>
 	> __...
 	> __endif
+	  else
+	  __...
+	  endif
+<
+|<Plug>(textobj-indent-i)| will select lines as follows:
+(here ">" indicates the selected line)
+>
+	  if some_condition_is_satisfied
+	> _|if another_condition_is_satisfied
+	> ____call s:do_x()
+	> __endif
+
+	  __...
+	  __endif
 	  else
 	  __...
 	  endif
@@ -91,7 +105,7 @@ MAPPINGS					*textobj-indent-mappings*
 
 These key mappings are defined in Visual mode and Operator-pending mode.
 
-<Plug>(textobj-indent)				*<Plug>(textobj-indent)*
+<Plug>(textobj-indent-a)			*<Plug>(textobj-indent-a)*
 			Select a block of lines with the same indentation
 			level.  More precisely, select lines which are:
 			- adjacent to the current line, and
@@ -102,6 +116,10 @@ These key mappings are defined in Visual mode and Operator-pending mode.
 			next line will be used to select.  If that line is
 			also ampty, the indentation of the next line of that
 			line will be used instead.  And so forth.
+
+<Plug>(textobj-indent-i)			*<Plug>(textobj-indent-i)*
+			Like |<Plug>(textobj-indent-a)|, but it doesn't
+			include empty lines.
 
 
 
@@ -120,8 +138,8 @@ unless [!] is given.
 
 	{lhs}	{rhs}			~
 	-----	----------------------	~
-	ai	<Plug>(textobj-indent)
-	ii	<Plug>(textobj-indent)
+	ai	<Plug>(textobj-indent-a)
+	ii	<Plug>(textobj-indent-i)
 
 
 
@@ -129,11 +147,12 @@ unless [!] is given.
 ==============================================================================
 BUGS						*textobj-indent-bugs*
 
-- |<Plug>(textobj-indent)| counts indentation level by the number of leading
-  whitespace and/or tab.
+- |<Plug>(textobj-indent-a)| and |<Plug>(textobj-indent-i)| count indentation
+  level by the number of leading whitespace and/or tab.
 
 - The current selection is not extended like |aw| nor |ip|
-  whenever |<Plug>(textobj-indent)| is repeated in Visual mode.
+  whenever |<Plug>(textobj-indent-a)| or |<Plug>(textobj-indent-i)| is
+  repeated in Visual mode.
 
 - So that [count] is just ignored.
 
@@ -144,6 +163,11 @@ BUGS						*textobj-indent-bugs*
 
 ==============================================================================
 CHANGELOG					*textobj-indent-changelog*
+
+0.0.1	2009-02-27T13:04:37+09:00
+	- Add |<Plug>(textobj-indent-a)| and |<Plug>(textobj-indent-i)|.
+	- Remove |<Plug>(textobj-indent)|.
+	  Use |<Plug>(textobj-indent-a)| instead.
 
 0.0.0	2008-12-13T23:04:37+09:00
 	- Initial version.
