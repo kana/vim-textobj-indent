@@ -84,6 +84,18 @@ function! s:select(include_empty_lines_p)  "{{{2
     let start_linenr -= 1
   endwhile
   let start_linenr += 1
+  if line('$') < start_linenr
+    let start_linenr = line('$')
+  endif
+
+  " Select the cursor line only
+  " if <Plug>(textobj-indent-i) is executed in the last empty lines.
+  if ((!a:include_empty_lines_p)
+  \   && start_linenr == end_linenr
+  \   && start_indent == s:EMPTY_LINE)
+    let start_linenr = cursor_linenr
+    let end_linenr = cursor_linenr
+  endif
 
   return ['V', [0, start_linenr, 1, 0], [0, end_linenr, col(end_linenr), 0]]
 endfunction
