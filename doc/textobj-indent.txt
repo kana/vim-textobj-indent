@@ -164,6 +164,10 @@ BUGS						*textobj-indent-bugs*
 ==============================================================================
 CHANGELOG					*textobj-indent-changelog*
 
+0.0.2	2009-04-17T17:45:31+09:00
+	- Fix the bug to calculate indentation levels.  Now these text objects
+	  target a set of lines with the same indentation as you see.
+
 0.0.1	2009-02-27T13:04:37+09:00
 	- Add |<Plug>(textobj-indent-a)| and |<Plug>(textobj-indent-i)|.
 	- Remove |<Plug>(textobj-indent)|.

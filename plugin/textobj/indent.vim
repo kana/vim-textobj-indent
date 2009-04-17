@@ -122,7 +122,7 @@ function! s:indent_level_of(linenr)  "{{{2
   if _ == ''
     return s:EMPTY_LINE
   else
-    return len(matchstr(getline(a:linenr), '^\(\s*\)\ze\%(\S\|$\)'))
+    return indent(a:linenr)
   endif
 endfunction
 
