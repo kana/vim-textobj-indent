@@ -1,6 +1,6 @@
 *textobj-indent.txt*	Text objects for lines with the same indentation level
 
-Version 0.0.1
+Version 0.0.2
 Script ID: 2484
 Copyright (C) 2008 kana <http://whileimautomaton.net/>
 License: MIT license  {{{
