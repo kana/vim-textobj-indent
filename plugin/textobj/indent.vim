@@ -97,7 +97,9 @@ function! s:select(include_empty_lines_p)  "{{{2
     let end_linenr = cursor_linenr
   endif
 
-  return ['V', [0, start_linenr, 1, 0], [0, end_linenr, col(end_linenr), 0]]
+  return ['V',
+  \       [0, start_linenr, 1, 0],
+  \       [0, end_linenr, len(getline(end_linenr)) + 1, 0]]
 endfunction
 
 

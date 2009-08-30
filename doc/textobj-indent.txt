@@ -172,6 +172,7 @@ CHANGELOG					*textobj-indent-changelog*
 0.0.3	2009-08-30T12:06:37+09:00	      *textobj-indent-changelog-0.0.3*
 	- Revise the document a bit.
 	- Add tests.
+	- Fix a minor bug.
 
 0.0.2	2009-04-17T17:45:31+09:00	      *textobj-indent-changelog-0.0.2*
 	- Fix the bug to calculate indentation levels.  Now these text objects
