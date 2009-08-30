@@ -31,12 +31,16 @@ Result: 10 / 10
 ===== "<Plug>(textobj-indent-a)"
 TEST: [line("'<"), col("'<")]  ==>  [2, 1] ... ok
 TEST: [line("'>"), col("'>")]  ==>  [8, 8] ... ok
-Result: 2 / 2
+TEST: [line("'["), col("'[")]  ==>  [2, 1] ... ok
+TEST: [line("']"), col("']")]  ==>  [8, 8] ... ok
+Result: 4 / 4
 
 ===== "<Plug>(textobj-indent-i)"
 TEST: [line("'<"), col("'<")]  ==>  [2, 1] ... ok
 TEST: [line("'>"), col("'>")]  ==>  [5, 24] ... ok
-Result: 2 / 2
+TEST: [line("'["), col("'[")]  ==>  [2, 1] ... ok
+TEST: [line("']"), col("']")]  ==>  [5, 24] ... ok
+Result: 4 / 4
 
 ===== Total
-Result: 25 / 25
+Result: 29 / 29

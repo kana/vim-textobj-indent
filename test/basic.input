@@ -66,6 +66,10 @@ function s:test_select_a()  "{{{1
   execute "normal v\<Plug>(textobj-indent-a)\<Esc>"
   Assert [line("'<"), col("'<")] ==> [2, 1]
   Assert [line("'>"), col("'>")] ==> [8, 8]
+
+  execute "silent normal y\<Plug>(textobj-indent-a)"
+  Assert [line("'["), col("'[")] ==> [2, 1]
+  Assert [line("']"), col("']")] ==> [8, 8]
 endfunction
 
 
@@ -96,6 +100,10 @@ function s:test_select_i()  "{{{1
   execute "normal v\<Plug>(textobj-indent-i)\<Esc>"
   Assert [line("'<"), col("'<")] ==> [2, 1]
   Assert [line("'>"), col("'>")] ==> [5, 24]
+
+  execute "silent normal y\<Plug>(textobj-indent-i)"
+  Assert [line("'["), col("'[")] ==> [2, 1]
+  Assert [line("']"), col("']")] ==> [5, 24]
 endfunction
 
 
