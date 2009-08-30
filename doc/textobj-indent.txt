@@ -155,9 +155,6 @@ unless [!] is given.
 ==============================================================================
 BUGS						*textobj-indent-bugs*
 
-- |<Plug>(textobj-indent-a)| and |<Plug>(textobj-indent-i)| count indentation
-  level by the number of leading whitespace and/or tab.
-
 - The current selection is not extended like |aw| nor |ip|
   whenever |<Plug>(textobj-indent-a)| or |<Plug>(textobj-indent-i)| is
   repeated in Visual mode.
