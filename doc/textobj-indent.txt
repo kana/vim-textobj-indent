@@ -1,4 +1,4 @@
-*textobj-indent.txt*	Text objects for lines with the same indentation level
+*textobj-indent.txt*	Text objects for indented blocks of lines
 
 Version 0.0.2
 Script ID: 2484
@@ -41,13 +41,14 @@ Changelog		|textobj-indent-changelog|
 INTRODUCTION					*textobj-indent-introduction*
 
 *textobj-indent* is a Vim plugin to provide text objects to select a block of
-lines with the same indentation level.
+lines which are similarly indented to the current line.
 
 For example, if the content of a buffer as follows:
-(here "|" means the cursor and "_" means an indentation)
+(here ">" means the current line under the cursor,
+and "_" means a space to indent)
 >
 	  if some_condition_is_satisfied
-	  _|if another_condition_is_satisfied
+	> __if another_condition_is_satisfied
 	  ____call s:do_x()
 	  __endif
 
@@ -58,26 +59,25 @@ For example, if the content of a buffer as follows:
 	  endif
 <
 |<Plug>(textobj-indent-a)| will select lines as follows:
-(here ">" indicates the selected line)
+(here "|" indicates the selected line)
 >
 	  if some_condition_is_satisfied
-	> _|if another_condition_is_satisfied
-	> ____call s:do_x()
-	> __endif
-	>
-	> __...
-	> __endif
+	>|__if another_condition_is_satisfied
+	 |____call s:do_x()
+	 |__endif
+	 |
+	 |__...
+	 |__endif
 	  else
 	  __...
 	  endif
 <
 |<Plug>(textobj-indent-i)| will select lines as follows:
-(here ">" indicates the selected line)
 >
 	  if some_condition_is_satisfied
-	> _|if another_condition_is_satisfied
-	> ____call s:do_x()
-	> __endif
+	>|__if another_condition_is_satisfied
+	 |____call s:do_x()
+	 |__endif
 
 	  __...
 	  __endif
@@ -109,8 +109,9 @@ MAPPINGS					*textobj-indent-mappings*
 These key mappings are defined in Visual mode and Operator-pending mode.
 
 <Plug>(textobj-indent-a)			*<Plug>(textobj-indent-a)*
-			Select a block of lines with the same indentation
-			level.  More precisely, select lines which are:
+			Select a block of lines which are similarly indented
+			to the current line.  More precisely, it selects lines
+			which are:
 			- adjacent to the current line, and
 			- indented the same or more amount
 			  as the current line, or empty line.
@@ -119,6 +120,10 @@ These key mappings are defined in Visual mode and Operator-pending mode.
 			next line will be used to select.  If that line is
 			also ampty, the indentation of the next line of that
 			line will be used instead.  And so forth.
+
+			See also |textobj-indent-introduction| for figures
+			which describe what lines to be selected by this
+			command.
 
 <Plug>(textobj-indent-i)			*<Plug>(textobj-indent-i)*
 			Like |<Plug>(textobj-indent-a)|, but it doesn't
@@ -166,6 +171,9 @@ BUGS						*textobj-indent-bugs*
 
 ==============================================================================
 CHANGELOG					*textobj-indent-changelog*
+
+0.0.3	2009-08-30T12:06:37+09:00	      *textobj-indent-changelog-0.0.3*
+	- Revise the document a bit.
 
 0.0.2	2009-04-17T17:45:31+09:00	      *textobj-indent-changelog-0.0.2*
 	- Fix the bug to calculate indentation levels.  Now these text objects

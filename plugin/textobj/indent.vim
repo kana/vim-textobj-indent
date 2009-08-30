@@ -1,4 +1,4 @@
-" textobj-indent - Text objects for lines with the same indentation level
+" textobj-indent - Text objects for indented blocks of lines
 " Version: 0.0.2
 " Copyright (C) 2008 kana <http://whileimautomaton.net/>
 " License: MIT license  {{{
