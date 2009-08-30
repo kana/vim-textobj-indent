@@ -23,14 +23,14 @@
 " }}}
 " Interface  "{{{1
 function! textobj#indent#select_a()  "{{{2
-  return s:select(!0)
+  return s:select(!0, 'same-or-deep')
 endfunction
 
 
 
 
 function! textobj#indent#select_i()  "{{{2
-  return s:select(!!0)
+  return s:select(!!0, 'same-or-deep')
 endfunction
 
 
@@ -47,7 +47,7 @@ let s:EMPTY_LINE = -1
 
 
 
-function! s:select(include_empty_lines_p)  "{{{2
+function! s:select(include_empty_lines_p, block_border_type)  "{{{2
   " Check the indentation level of the current or below line.
   let cursor_linenr = line('.')
   let base_linenr = cursor_linenr
@@ -63,7 +63,8 @@ function! s:select(include_empty_lines_p)  "{{{2
   let end_linenr = base_linenr + 1
   while end_linenr <= line('$')
     let end_indent = s:indent_level_of(end_linenr)
-    if s:block_border_p(end_indent, base_indent, a:include_empty_lines_p)
+    if s:block_border_p(end_indent, base_indent,
+    \                   a:include_empty_lines_p, a:block_border_type)
       break
     endif
     let end_linenr += 1
@@ -74,7 +75,8 @@ function! s:select(include_empty_lines_p)  "{{{2
   let start_linenr = base_linenr
   while 1 <= start_linenr
     let start_indent = s:indent_level_of(start_linenr)
-    if s:block_border_p(start_indent, base_indent, a:include_empty_lines_p)
+    if s:block_border_p(start_indent, base_indent,
+    \                   a:include_empty_lines_p, a:block_border_type)
       break
     endif
     let start_linenr -= 1
@@ -113,10 +115,15 @@ endfunction
 
 
 
-function! s:block_border_p(indent, base_indent, include_empty_lines_p)  "{{{2
-  return a:include_empty_lines_p
-  \      ? a:indent != s:EMPTY_LINE && a:indent < a:base_indent
-  \      : a:indent == s:EMPTY_LINE || a:indent < a:base_indent
+function! s:block_border_p(indent,base_indent,include_empty_lines_p,type) "{{{2
+  if a:type ==# 'same-or-deep'
+    return a:include_empty_lines_p
+    \      ? a:indent != s:EMPTY_LINE && a:indent < a:base_indent
+    \      : a:indent == s:EMPTY_LINE || a:indent < a:base_indent
+  else
+    echoerr 'Unexpected type:' string(a:type)
+    return 0
+  endif
 endfunction
 
 
