@@ -9,7 +9,17 @@ TEST: maparg('ii', 'i')  ==>  '' ... ok
 TEST: maparg('ii', 'n')  ==>  '' ... ok
 TEST: maparg('ii', 'o')  ==>  '<Plug>(textobj-indent-i)' ... ok
 TEST: maparg('ii', 'v')  ==>  '<Plug>(textobj-indent-i)' ... ok
-Result: 10 / 10
+TEST: maparg('aI', 'c')  ==>  '' ... ok
+TEST: maparg('aI', 'i')  ==>  '' ... ok
+TEST: maparg('aI', 'n')  ==>  '' ... ok
+TEST: maparg('aI', 'o')  ==>  '<Plug>(textobj-indent-same-a)' ... ok
+TEST: maparg('aI', 'v')  ==>  '<Plug>(textobj-indent-same-a)' ... ok
+TEST: maparg('iI', 'c')  ==>  '' ... ok
+TEST: maparg('iI', 'i')  ==>  '' ... ok
+TEST: maparg('iI', 'n')  ==>  '' ... ok
+TEST: maparg('iI', 'o')  ==>  '<Plug>(textobj-indent-same-i)' ... ok
+TEST: maparg('iI', 'v')  ==>  '<Plug>(textobj-indent-same-i)' ... ok
+Result: 20 / 20
 
 ===== "Check global variables"
 TEST: !!exists('g:loaded_textobj_indent')  ==>  1 ... ok
@@ -26,7 +36,17 @@ TEST: maparg('<Plug>(textobj-indent-i)', 'i') != ''  ==>  0 ... ok
 TEST: maparg('<Plug>(textobj-indent-i)', 'n') != ''  ==>  0 ... ok
 TEST: maparg('<Plug>(textobj-indent-i)', 'o') != ''  ==>  1 ... ok
 TEST: maparg('<Plug>(textobj-indent-i)', 'v') != ''  ==>  1 ... ok
-Result: 10 / 10
+TEST: maparg('<Plug>(textobj-indent-same-a)', 'c') != ''  ==>  0 ... ok
+TEST: maparg('<Plug>(textobj-indent-same-a)', 'i') != ''  ==>  0 ... ok
+TEST: maparg('<Plug>(textobj-indent-same-a)', 'n') != ''  ==>  0 ... ok
+TEST: maparg('<Plug>(textobj-indent-same-a)', 'o') != ''  ==>  1 ... ok
+TEST: maparg('<Plug>(textobj-indent-same-a)', 'v') != ''  ==>  1 ... ok
+TEST: maparg('<Plug>(textobj-indent-same-i)', 'c') != ''  ==>  0 ... ok
+TEST: maparg('<Plug>(textobj-indent-same-i)', 'i') != ''  ==>  0 ... ok
+TEST: maparg('<Plug>(textobj-indent-same-i)', 'n') != ''  ==>  0 ... ok
+TEST: maparg('<Plug>(textobj-indent-same-i)', 'o') != ''  ==>  1 ... ok
+TEST: maparg('<Plug>(textobj-indent-same-i)', 'v') != ''  ==>  1 ... ok
+Result: 20 / 20
 
 ===== "<Plug>(textobj-indent-a)"
 TEST: [line("'<"), col("'<")]  ==>  [2, 1] ... ok
@@ -42,5 +62,19 @@ TEST: [line("'["), col("'[")]  ==>  [2, 1] ... ok
 TEST: [line("']"), col("']")]  ==>  [5, 24] ... ok
 Result: 4 / 4
 
+===== "<Plug>(textobj-indent-same-a)"
+TEST: [line("'<"), col("'<")]  ==>  [4, 1] ... ok
+TEST: [line("'>"), col("'>")]  ==>  [8, 8] ... ok
+TEST: [line("'["), col("'[")]  ==>  [4, 1] ... ok
+TEST: [line("']"), col("']")]  ==>  [8, 8] ... ok
+Result: 4 / 4
+
+===== "<Plug>(textobj-indent-same-i)"
+TEST: [line("'<"), col("'<")]  ==>  [4, 1] ... ok
+TEST: [line("'>"), col("'>")]  ==>  [5, 24] ... ok
+TEST: [line("'["), col("'[")]  ==>  [4, 1] ... ok
+TEST: [line("']"), col("']")]  ==>  [5, 24] ... ok
+Result: 4 / 4
+
 ===== Total
-Result: 29 / 29
+Result: 57 / 57

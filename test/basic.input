@@ -11,7 +11,10 @@ endfunction
 function s:test_named_key_mappings()  "{{{1
   Title "Check the existence of the named key mappings in each mode"
 
-  for _ in ['<Plug>(textobj-indent-a)', '<Plug>(textobj-indent-i)']
+  for _ in ['<Plug>(textobj-indent-a)',
+  \         '<Plug>(textobj-indent-i)',
+  \         '<Plug>(textobj-indent-same-a)',
+  \         '<Plug>(textobj-indent-same-i)']
     execute "Assert maparg(".string(_).", 'c') != '' ==> 0"
     execute "Assert maparg(".string(_).", 'i') != '' ==> 0"
     execute "Assert maparg(".string(_).", 'n') != '' ==> 0"
@@ -36,6 +39,16 @@ function s:test_default_key_mappings()  "{{{1
   Assert maparg('ii', 'n') ==> ''
   Assert maparg('ii', 'o') ==> '<Plug>(textobj-indent-i)'
   Assert maparg('ii', 'v') ==> '<Plug>(textobj-indent-i)'
+  Assert maparg('aI', 'c') ==> ''
+  Assert maparg('aI', 'i') ==> ''
+  Assert maparg('aI', 'n') ==> ''
+  Assert maparg('aI', 'o') ==> '<Plug>(textobj-indent-same-a)'
+  Assert maparg('aI', 'v') ==> '<Plug>(textobj-indent-same-a)'
+  Assert maparg('iI', 'c') ==> ''
+  Assert maparg('iI', 'i') ==> ''
+  Assert maparg('iI', 'n') ==> ''
+  Assert maparg('iI', 'o') ==> '<Plug>(textobj-indent-same-i)'
+  Assert maparg('iI', 'v') ==> '<Plug>(textobj-indent-same-i)'
 endfunction
 
 
@@ -103,6 +116,74 @@ function s:test_select_i()  "{{{1
 
   execute "silent normal y\<Plug>(textobj-indent-i)"
   Assert [line("'["), col("'[")] ==> [2, 1]
+  Assert [line("']"), col("']")] ==> [5, 24]
+endfunction
+
+
+
+
+function s:test_select_same_a()  "{{{1
+  Title "<Plug>(textobj-indent-same-a)"
+
+  tabnew
+  tabonly!
+
+  silent put =[
+  \   'if some_condition_is_satisfied',
+  \   '  if another_condition_is_satisfied',
+  \   '    call s:special_stuff()',
+  \   '  endif',
+  \   '  call s:normal_stuff()',
+  \   '',
+  \   '  ...',
+  \   '  endif',
+  \   'else',
+  \   '  ...',
+  \   'endif',
+  \ ]
+  1 delete _
+  normal! 4G
+
+  execute "normal v\<Plug>(textobj-indent-same-a)\<Esc>"
+  Assert [line("'<"), col("'<")] ==> [4, 1]
+  Assert [line("'>"), col("'>")] ==> [8, 8]
+
+  execute "silent normal y\<Plug>(textobj-indent-same-a)"
+  Assert [line("'["), col("'[")] ==> [4, 1]
+  Assert [line("']"), col("']")] ==> [8, 8]
+endfunction
+
+
+
+
+function s:test_select_same_i()  "{{{1
+  Title "<Plug>(textobj-indent-same-i)"
+
+  tabnew
+  tabonly!
+
+  silent put =[
+  \   'if some_condition_is_satisfied',
+  \   '  if another_condition_is_satisfied',
+  \   '    call s:special_stuff()',
+  \   '  endif',
+  \   '  call s:normal_stuff()',
+  \   '',
+  \   '  ...',
+  \   '  endif',
+  \   'else',
+  \   '  ...',
+  \   'endif',
+  \ ]
+  1 delete _
+  normal! 4G
+
+  execute "normal v\<Plug>(textobj-indent-same-i)\<Esc>"
+  Assert [line("'<"), col("'<")] ==> [4, 1]
+  Assert [line("'>"), col("'>")] ==> [5, 24]
+
+  execute "silent normal y\<Plug>(textobj-indent-same-i)"
+  Assert [line("'["), col("'[")] ==> [4, 1]
   Assert [line("']"), col("']")] ==> [5, 24]
 endfunction
 

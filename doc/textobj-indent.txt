@@ -85,6 +85,8 @@ and "_" means a space to indent)
 	  __...
 	  endif
 <
+More variants are also available.  See |textobj-indnet-mapping| for the
+details.
 
 
 Requirements:
@@ -129,6 +131,39 @@ These key mappings are defined in Visual mode and Operator-pending mode.
 			Like |<Plug>(textobj-indent-a)|, but it doesn't
 			include empty lines.
 
+<Plug>(textobj-indent-same-a)		       *<Plug>(textobj-indent-same-a)*
+<Plug>(textobj-indent-same-i)		       *<Plug>(textobj-indent-same-i)*
+			Like |<Plug>(textobj-indent-a)| or
+			|<Plug>(textobj-indent-i)|, but select a block of
+			lines with the same indentation level, not including
+			lines which are more indented than the current line.
+
+			For example, suppose you edit the following text:
+			(here ">" denotes the cursor position and "|" denotes
+			the current selection.)
+>
+				  if some_condition_is_satisfied
+				    call special_stuff()
+				> endif
+				  call normal_stuff()
+<
+			|<Plug>(textobj-indent-same-a)| selects lines as
+			follows:
+>
+				  if some_condition_is_satisfied
+				    call special_stuff()
+				>|endif
+				 |call normal_stuff()
+<
+			While |<Plug>(textobj-indent-a)| selects lines as
+			follows:
+>
+				 |if some_condition_is_satisfied
+				 |  call special_stuff()
+				>|endif
+				 |call normal_stuff()
+<
+
 
 
 
@@ -148,6 +183,8 @@ unless [!] is given.
 	-----	----------------------	~
 	ai	<Plug>(textobj-indent-a)
 	ii	<Plug>(textobj-indent-i)
+	aI	<Plug>(textobj-indent-same-a)
+	iI	<Plug>(textobj-indent-same-i)
 
 
 
@@ -172,6 +209,10 @@ CHANGELOG					*textobj-indent-changelog*
 0.0.3	2009-08-30T12:06:37+09:00	      *textobj-indent-changelog-0.0.3*
 	Incompatible changes:
 	- Requrie |textobj-user| 0.3.8 or later.
+
+	Major improvements:
+	- Add |<Plug>(textobj-indent-same-a)| and
+	  |<Plug>(textobj-indent-same-i)|.
 
 	Minor improvements:
 	- Revise the document a bit.

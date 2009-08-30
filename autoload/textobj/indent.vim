@@ -36,6 +36,20 @@ endfunction
 
 
 
+function! textobj#indent#select_same_a()  "{{{2
+  return s:select(!0, 'same')
+endfunction
+
+
+
+
+function! textobj#indent#select_same_i()  "{{{2
+  return s:select(!!0, 'same')
+endfunction
+
+
+
+
 
 
 
@@ -120,6 +134,10 @@ function! s:block_border_p(indent,base_indent,include_empty_lines_p,type) "{{{2
     return a:include_empty_lines_p
     \      ? a:indent != s:EMPTY_LINE && a:indent < a:base_indent
     \      : a:indent == s:EMPTY_LINE || a:indent < a:base_indent
+  elseif a:type ==# 'same'
+    return a:include_empty_lines_p
+    \      ? a:indent != s:EMPTY_LINE && a:indent != a:base_indent
+    \      : a:indent == s:EMPTY_LINE || a:indent != a:base_indent
   else
     echoerr 'Unexpected type:' string(a:type)
     return 0
