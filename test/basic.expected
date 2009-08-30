@@ -1,0 +1,42 @@
+===== "Check the definitions of the default key mappings in each mode"
+TEST: maparg('ai', 'c')  ==>  '' ... ok
+TEST: maparg('ai', 'i')  ==>  '' ... ok
+TEST: maparg('ai', 'n')  ==>  '' ... ok
+TEST: maparg('ai', 'o')  ==>  '<Plug>(textobj-indent-a)' ... ok
+TEST: maparg('ai', 'v')  ==>  '<Plug>(textobj-indent-a)' ... ok
+TEST: maparg('ii', 'c')  ==>  '' ... ok
+TEST: maparg('ii', 'i')  ==>  '' ... ok
+TEST: maparg('ii', 'n')  ==>  '' ... ok
+TEST: maparg('ii', 'o')  ==>  '<Plug>(textobj-indent-i)' ... ok
+TEST: maparg('ii', 'v')  ==>  '<Plug>(textobj-indent-i)' ... ok
+Result: 10 / 10
+
+===== "Check global variables"
+TEST: !!exists('g:loaded_textobj_indent')  ==>  1 ... ok
+Result: 1 / 1
+
+===== "Check the existence of the named key mappings in each mode"
+TEST: maparg('<Plug>(textobj-indent-a)', 'c') != ''  ==>  0 ... ok
+TEST: maparg('<Plug>(textobj-indent-a)', 'i') != ''  ==>  0 ... ok
+TEST: maparg('<Plug>(textobj-indent-a)', 'n') != ''  ==>  0 ... ok
+TEST: maparg('<Plug>(textobj-indent-a)', 'o') != ''  ==>  1 ... ok
+TEST: maparg('<Plug>(textobj-indent-a)', 'v') != ''  ==>  1 ... ok
+TEST: maparg('<Plug>(textobj-indent-i)', 'c') != ''  ==>  0 ... ok
+TEST: maparg('<Plug>(textobj-indent-i)', 'i') != ''  ==>  0 ... ok
+TEST: maparg('<Plug>(textobj-indent-i)', 'n') != ''  ==>  0 ... ok
+TEST: maparg('<Plug>(textobj-indent-i)', 'o') != ''  ==>  1 ... ok
+TEST: maparg('<Plug>(textobj-indent-i)', 'v') != ''  ==>  1 ... ok
+Result: 10 / 10
+
+===== "<Plug>(textobj-indent-a)"
+TEST: [line("'<"), col("'<")]  ==>  [2, 1] ... ok
+TEST: [line("'>"), col("'>")]  ==>  [8, 8] ... ok
+Result: 2 / 2
+
+===== "<Plug>(textobj-indent-i)"
+TEST: [line("'<"), col("'<")]  ==>  [2, 1] ... ok
+TEST: [line("'>"), col("'>")]  ==>  [5, 24] ... ok
+Result: 2 / 2
+
+===== Total
+Result: 25 / 25

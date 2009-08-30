@@ -1,0 +1,107 @@
+" Tests for textobj-indent
+function s:test_global_variables()  "{{{1
+  Title "Check global variables"
+
+  Assert !!exists('g:loaded_textobj_indent') ==> 1
+endfunction
+
+
+
+
+function s:test_named_key_mappings()  "{{{1
+  Title "Check the existence of the named key mappings in each mode"
+
+  for _ in ['<Plug>(textobj-indent-a)', '<Plug>(textobj-indent-i)']
+    execute "Assert maparg(".string(_).", 'c') != '' ==> 0"
+    execute "Assert maparg(".string(_).", 'i') != '' ==> 0"
+    execute "Assert maparg(".string(_).", 'n') != '' ==> 0"
+    execute "Assert maparg(".string(_).", 'o') != '' ==> 1"
+    execute "Assert maparg(".string(_).", 'v') != '' ==> 1"
+  endfor
+endfunction
+
+
+
+
+function s:test_default_key_mappings()  "{{{1
+  Title "Check the definitions of the default key mappings in each mode"
+
+  Assert maparg('ai', 'c') ==> ''
+  Assert maparg('ai', 'i') ==> ''
+  Assert maparg('ai', 'n') ==> ''
+  Assert maparg('ai', 'o') ==> '<Plug>(textobj-indent-a)'
+  Assert maparg('ai', 'v') ==> '<Plug>(textobj-indent-a)'
+  Assert maparg('ii', 'c') ==> ''
+  Assert maparg('ii', 'i') ==> ''
+  Assert maparg('ii', 'n') ==> ''
+  Assert maparg('ii', 'o') ==> '<Plug>(textobj-indent-i)'
+  Assert maparg('ii', 'v') ==> '<Plug>(textobj-indent-i)'
+endfunction
+
+
+
+
+function s:test_select_a()  "{{{1
+  Title "<Plug>(textobj-indent-a)"
+
+  tabnew
+  tabonly!
+
+  silent put =[
+  \   'if some_condition_is_satisfied',
+  \   '  if another_condition_is_satisfied',
+  \   '    call s:special_stuff()',
+  \   '  endif',
+  \   '  call s:normal_stuff()',
+  \   '',
+  \   '  ...',
+  \   '  endif',
+  \   'else',
+  \   '  ...',
+  \   'endif',
+  \ ]
+  1 delete _
+  normal! 4G
+
+  execute "normal v\<Plug>(textobj-indent-a)\<Esc>"
+  Assert [line("'<"), col("'<")] ==> [2, 1]
+  Assert [line("'>"), col("'>")] ==> [8, 8]
+endfunction
+
+
+
+
+function s:test_select_i()  "{{{1
+  Title "<Plug>(textobj-indent-i)"
+
+  tabnew
+  tabonly!
+
+  silent put =[
+  \   'if some_condition_is_satisfied',
+  \   '  if another_condition_is_satisfied',
+  \   '    call s:special_stuff()',
+  \   '  endif',
+  \   '  call s:normal_stuff()',
+  \   '',
+  \   '  ...',
+  \   '  endif',
+  \   'else',
+  \   '  ...',
+  \   'endif',
+  \ ]
+  1 delete _
+  normal! 4G
+
+  execute "normal v\<Plug>(textobj-indent-i)\<Esc>"
+  Assert [line("'<"), col("'<")] ==> [2, 1]
+  Assert [line("'>"), col("'>")] ==> [5, 24]
+endfunction
+
+
+
+
+Test  "{{{1
+
+" __END__
+" vim: filetype=vim foldmethod=marker
