@@ -5,6 +5,10 @@ INSTALLATION_DIR := $(HOME)/.vim
 TARGETS_STATIC = $(filter %.vim %.txt,$(all_files_in_repos))
 TARGETS_ARCHIVED = $(all_files_in_repos) mduem/Makefile
 
+DEPS := vim-textobj-user
+DEP_vim_textobj_user_URI := ../vim-textobj-user
+DEP_vim_textobj_user_VERSION := 0.3.8
+
 
 
 
