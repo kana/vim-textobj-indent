@@ -28,9 +28,8 @@ CONTENTS					*textobj-indent-contents*
 
 Introduction		|textobj-indent-introduction|
 Interface		|textobj-indent-interface|
-  Commands		  |textobj-indent-commands|
-  Functions		  |textobj-indent-functions|
   Mappings		  |textobj-indent-mappings|
+Customizing		|textobj-indent-customizing|
 Bugs			|textobj-indent-bugs|
 Changelog		|textobj-indent-changelog|
 
@@ -85,7 +84,7 @@ and "_" means a space to indent)
 	  __...
 	  endif
 <
-More variants are also available.  See |textobj-indnet-mapping| for the
+More variants are also available.  See |textobj-indent-mappings| for the
 details.
 
 
