@@ -28,8 +28,6 @@ CONTENTS					*textobj-indent-contents*
 
 Introduction		|textobj-indent-introduction|
 Interface		|textobj-indent-interface|
-  Commands		  |textobj-indent-commands|
-  Functions		  |textobj-indent-functions|
   Mappings		  |textobj-indent-mappings|
 Bugs			|textobj-indent-bugs|
 Changelog		|textobj-indent-changelog|
