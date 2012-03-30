@@ -85,7 +85,7 @@ and "_" means a space to indent)
 	  __...
 	  endif
 <
-More variants are also available.  See |textobj-indnet-mapping| for the
+More variants are also available.  See |textobj-indent-mappings| for the
 details.
 
 
