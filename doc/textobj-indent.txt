@@ -1,9 +1,9 @@
 *textobj-indent.txt*	Text objects for indented blocks of lines
 
-Version 0.0.4
+Version 0.0.5
 Script ID: 2484
-Copyright (C) 2008 kana <http://whileimautomaton.net/>
-License: MIT license  {{{
+Copyright (C) 2008-2012 Kana Natsuno <http://whileimautomaton.net/>
+License: So-called MIT/X license  {{{
     Permission is hereby granted, free of charge, to any person obtaining
     a copy of this software and associated documentation files (the
     "Software"), to deal in the Software without restriction, including
@@ -204,6 +204,11 @@ BUGS						*textobj-indent-bugs*
 
 ==============================================================================
 CHANGELOG					*textobj-indent-changelog*
+
+0.0.5	2012-03-30T21:47:34+09:00	      *textobj-indent-changelog-0.0.5*
+	- Fix typos in the document.  Thanks to Ujihisa and John Tyree for
+	  reporting the mistake.
+	- Revise |textobj-indent-contents|.
 
 0.0.4	2012-03-24T14:48:22+09:00	      *textobj-indent-changelog-0.0.4*
 	- Refine the document a bit.
