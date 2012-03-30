@@ -29,6 +29,7 @@ CONTENTS					*textobj-indent-contents*
 Introduction		|textobj-indent-introduction|
 Interface		|textobj-indent-interface|
   Mappings		  |textobj-indent-mappings|
+Customizing		|textobj-indent-customizing|
 Bugs			|textobj-indent-bugs|
 Changelog		|textobj-indent-changelog|
 
