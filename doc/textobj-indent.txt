@@ -208,6 +208,10 @@ BUGS						*textobj-indent-bugs*
 ==============================================================================
 CHANGELOG					*textobj-indent-changelog*
 
+0.0.6	2013-01-18T20:45:38+09:00		*textobj-indent-changelog-0.0.6*
+	- Support vim-flavor <https://github.com/kana/vim-flavor>.
+	- Update |textobj-indent-introduction|.
+
 0.0.5	2012-03-30T21:47:34+09:00	      *textobj-indent-changelog-0.0.5*
 	- Fix typos in the document.  Thanks to Ujihisa and John Tyree for
 	  reporting the mistake.
