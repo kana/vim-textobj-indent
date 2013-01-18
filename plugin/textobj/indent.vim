@@ -1,6 +1,6 @@
 " textobj-indent - Text objects for indented blocks of lines
-" Version: 0.0.5
-" Copyright (C) 2008-2012 Kana Natsuno <http://whileimautomaton.net/>
+" Version: 0.0.6
+" Copyright (C) 2008-2013 Kana Natsuno <http://whileimautomaton.net/>
 " License: So-called MIT/X license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
 "     a copy of this software and associated documentation files (the
