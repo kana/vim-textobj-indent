@@ -1,6 +1,6 @@
 *textobj-indent.txt*	Text objects for indented blocks of lines
 
-Version 0.0.5
+Version 0.0.6
 Script ID: 2484
 Copyright (C) 2008-2013 Kana Natsuno <http://whileimautomaton.net/>
 License: So-called MIT/X license  {{{
